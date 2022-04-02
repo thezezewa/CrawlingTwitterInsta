@@ -13,7 +13,7 @@ def get_driver():
     driver_option.add_argument("--disable-dev-shm-usage")
     driver_option.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36")
 
-    driver = webdriver.Chrome('./chromedriver.exe')
+    driver = webdriver.Chrome('./chromedriver.exe.exe')
 
     driver.implicitly_wait(3)
 
