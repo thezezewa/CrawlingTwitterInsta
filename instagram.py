@@ -15,7 +15,7 @@ hashtag_lists = []
 
 
 URL =  'https://www.instagram.com'
-driver = webdriver.Chrome(executable_path='./chromedriver.exe')
+driver = webdriver.Chrome(executable_path='./chromedriver')
 html = driver.get(url = URL)
 time.sleep(3)
 
@@ -44,7 +44,7 @@ time.sleep(3)
 
 # 검색창 input 태그에 키워드 전달
 input_search = driver.find_element_by_css_selector('.XTCLo.d_djL.DljaH')
-input_search.send_keys('외식포장')
+input_search.send_keys('외식배달')
 time.sleep(3)
 
 # 검색창 input에 '외식배ㅇ달'이라고 검색하였을 때 나오는 첫번째 결과 조희 및 클릭
@@ -57,37 +57,44 @@ first_post = driver.find_element_by_css_selector('._9AhH0')
 first_post.click()
 time.sleep(5)
 
-f = open("./txt/instagram_외식포장.txt", 'w', encoding='utf-8')
 count = 0
 while True:
     idx = []
     # 게시물의 계정명 및 내용
     account = driver.find_element_by_css_selector('.C4VMK')
     post_time = driver.find_element_by_css_selector('._1o9PC')
-    url_lists.append(driver.current_url)
 
     print(driver.current_url)
-    url_lists.append(driver.current_url)
+    url_lists.append(driver.current_url.strip())
     print(account.text.split('\n')[0])
-    account_lists.append(account.text.split('\n')[0])
-    print(account.text.split('\n'))
-    length = len(account.text.split('\n'))
-
-    for i in range(length):
-        if account.text.split('\n')[i] == '':
+    account_lists.append(account.text.split('\n')[0].strip())
+    #   \n 단위로 나눈 body 값들 정제
+    new_line = ''
+    for index, line in enumerate(account.text.split('\n')):
+        # 계정명
+        if (index == 0) | (index == len(account.text.split('\n'))-1):
+            continue
+        if line == '':
             continue
         else:
-            idx.append(i)
-            print(account.text.split('\n')[i])
-            for j in range(len(account.text.split('\n')[i].split(' '))):
-                print(account.text.split('\n')[i].split(' ')[j])
-
-    del idx[0]
-    del idx[-1]
-    print(' '.join(account.text.split('\n')[idx]))
-    account_lists.append(account.text.split('\n')[0])
+            new_line = new_line + ' ' +line
+    print(new_line.strip())
+    body_lists.append(new_line.strip())
     print(post_time.text.strip())
+    time_lists.append(post_time.text.strip())
 
+    hashtags = ''
+    temp = []
+    for j in range(len(account.text.split('\n'))):
+        for k in range(len(account.text.split('\n')[j].split(' '))):
+            print(account.text.split('\n')[j].split(' ')[k])
+            if '#' in account.text.split('\n')[j].split(' ')[k]:
+                temp.append(account.text.split('\n')[j].split(' ')[k])
+
+    for ht in temp:
+        hashtags = hashtags + ' ' + ht
+
+    hashtag_lists.append(hashtags)
     time.sleep(5)
 
     # 다음 게시글 넘기기
@@ -104,3 +111,8 @@ while True:
     except:
         break
 
+# 데이터프레임 생성
+df_insta = pd.DataFrame({'url':url_lists, 'account':account_lists, 'body':body_lists, 'time':time_lists, 'hashtag':hashtag_lists})
+print(df_insta)
+print(df_insta.info())
+df_insta.to_csv('./instagram_result_외식배달.csv', encoding='utf-8', index=False)

@@ -19,9 +19,9 @@ def get_driver():
     driver_option.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36")
 
     #driver = webdriver.Chrome('D:\JSU\crawler\chromedriver.exe.exe.exe')
-    #driver = webdriver.Chrome('/mnt/d/JSU/crawler/chromedriver.exe.exe.exe', chrome_options=driver_option)
-    driver = webdriver.Chrome('./chromedriver.exe.exe', chrome_options=driver_option)
-    #driver = webdriver.Chrome('/mnt/d/JSU/crawler/chromedriver.exe.exe.exe')
+    #driver = webdriver.Chrome('/mnt/d/JSU/crawler/chromedriver.exe.exe', chrome_options=driver_option)
+    driver = webdriver.Chrome('./chromedriver.exe', chrome_options=driver_option)
+    #driver = webdriver.Chrome('/mnt/d/JSU/crawler/chromedriver.exe.exe')
 
     #driver.implicitly_wait(3)
 
