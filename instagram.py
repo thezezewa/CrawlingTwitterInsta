@@ -21,11 +21,11 @@ time.sleep(3)
 
 # 아이디, 비밀번호 전송 후 로그인
 input_id = driver.find_element_by_name('username')
-input_id.send_keys('aoakdnf_c')
+input_id.send_keys('user_id')
 time.sleep(5)
 
 input_pw = driver.find_element_by_name('password')
-input_pw.send_keys('Joonyeong.1')
+input_pw.send_keys('user_pw')
 time.sleep(7)
 
 login_btn = driver.find_element_by_css_selector('.sqdOP.L3NKy.y3zKF     ')
@@ -56,6 +56,7 @@ time.sleep(7)
 first_post = driver.find_element_by_css_selector('._9AhH0')
 first_post.click()
 time.sleep(5)
+
 
 count = 0
 while True:
