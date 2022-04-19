@@ -37,7 +37,7 @@ def twitter_serach(driver, str):
     # 모든 게시글을 불러오는 while 반복문
     while True:
         # 해당 페이지의 게시글 모두 가져오기
-        ss = driver.find_elements_by_css_selector('.css-1dbjc4n.r-j5o65s.r-qklmqi.r-1adg3ll.r-1ny4l3l')
+        ss = driver.find_elements_by_css_selector('.css-1dbjc4n.r-1loqt21.r-18u37iz.r-1ny4l3l.r-1udh08x.r-1qhn6m8.r-i023vh.r-o7ynqc.r-6416eg')
 
         # 부적절한 게시물일 경우 크롤링할 때 해당 문구가 나오는데 이를 필터링
         for s in ss:
@@ -128,7 +128,7 @@ def make_df(li, url_lists):
 
 
     df = pd.DataFrame({'id':id_list,'account':account_list, 'date':date_list, 'content':content_list, 'url':url_list})
-    df.to_csv('./twitter_result_외식포장.csv', encoding='utf-8',  index=False)
+    df.to_csv('./csv/twitter_result_외식포장.csv', encoding='utf-8',  index=False)
 
 
 

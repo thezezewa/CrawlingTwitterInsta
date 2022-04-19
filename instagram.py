@@ -1,6 +1,5 @@
 import pandas as pd
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 import time
 import warnings
 warnings.filterwarnings('ignore')
@@ -114,6 +113,4 @@ while True:
 
 # 데이터프레임 생성
 df_insta = pd.DataFrame({'url':url_lists, 'account':account_lists, 'body':body_lists, 'time':time_lists, 'hashtag':hashtag_lists})
-print(df_insta)
-print(df_insta.info())
 df_insta.to_csv('./instagram_result_외식배달.csv', encoding='utf-8', index=False)
